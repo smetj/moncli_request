@@ -10,9 +10,8 @@ When executing moncli_request you have to define following parameters:
 
     user@localhost $ moncli_request --broker host_name --host host_name --subject subject --repository absolute_path
 
-* broker
-
-    This is the name of the RabbitMQ message broker.
+* broker:
+This is the name of the RabbitMQ message broker.
 
 * host
 
