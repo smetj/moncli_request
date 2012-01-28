@@ -12,7 +12,7 @@ When executing moncli_request you have to define following parameters:
 
 * broker:
 
-This is the name of the RabbitMQ message broker.
+    This is the name of the RabbitMQ message broker.
 
 * host
 
@@ -27,7 +27,6 @@ This is the name of the RabbitMQ message broker.
 * repository
 
     The directory containing the json "templates" which will be completed by Moncli.
-
     The repository has following structure:
 
         repository/
