@@ -39,7 +39,7 @@ my %options =   ("subject" => '',
                 "exchange" => 'moncli_report_requests',
                 "user" => 'guest',
                 "password" => 'guest',
-                "repository" => '');
+                "repository" => '/opt/moncli_request/repository');
 
 GetOptions ("subject=s" => \$options{subject},
             "host=s" => \$options{host},
@@ -154,18 +154,18 @@ Description:
     
 Usage:
 
-    moncli_request --broker host_name [--exchange name] [--user] [--password] --host host_name --subject subject --repository absolute_path
+    moncli_request --broker host_name [--exchange name] [--user] [--password] --host host_name --subject subject [--repository absolute_path]
     
     
 Parameters:
 
     --broker        The hostname of a RabbitMQ broker.
-    --exchange      The exchange to which report requests should be submitted.  By default this is moncli_report_requests.
-    --user          The username to authenticate against RabbitMQ.
-    --password      The password to authenticate against RabbitMQ.
+    --exchange      The exchange to which report requests should be submitted.  (default: moncli_report_requests)
+    --user          The username to authenticate against RabbitMQ. (default: guest)
+    --password      The password to authenticate against RabbitMQ. (default: guest)
     --host          The hostname on which Moncli listens. This should also be the name of a Queue (key) in RabbitMQ.
     --subject       The subject of the report request.
-    --repository    The absolute pathname of the report request repository.
+    --repository    The absolute pathname of the report request repository. (default: /opt/moncli_request/repository)
     
     
 Note:
