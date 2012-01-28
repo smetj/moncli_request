@@ -11,17 +11,21 @@ When executing moncli_request you have to define following parameters:
     user@localhost $ moncli_request --broker host_name --host host_name --subject subject --repository absolute_path
 
 * broker
+
     This is the name of the RabbitMQ message broker.
 
 * host
+
     Since each MonCli instance consumes on the RabbitMQ broker a queue with its own hostname.  If you want to reach the MonCli client of 
     a certain host then you define the name of that host/queue here.  A queue with this name should exist in the RabbitMQ environment.
 
 * subject
+
     Each report request has a subject.  The subject (besides UUIDs) is a helpful value to differenciate your reports from each other.
     In your monitoring framework such as Nagios the subject could be the service name.
 
 * repository
+
     The directory containing the json "templates" which will be completed by Moncli.
 
     The repository has following structure:
