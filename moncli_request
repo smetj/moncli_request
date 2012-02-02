@@ -35,6 +35,7 @@ my $version ='0.1';
 #Set default values
 my %options =   ("subject" => '',
                 "host" => '',
+                "key" => '',
                 "broker" => 'localhost',
                 "exchange" => 'moncli_report_requests',
                 "user" => 'guest',
@@ -44,6 +45,7 @@ my %options =   ("subject" => '',
 GetOptions ("subject=s" => \$options{subject},
             "host=s" => \$options{host},
             "broker=s" => \$options{broker},
+            "key=s" => \$options{key},
             "exchange=s" => \$options{exchange},
             "user=s" => \$options{user},
             "password=s" => \$options{password},
@@ -75,7 +77,12 @@ sub SubmitBroker(){
     my $mq = Net::RabbitMQ->new();
     $mq->connect($options{broker}, { user => $options{user}, password => $options{password} });
     $mq->channel_open(1);
-    $mq->publish(1, $options{host},$document);
+    if ($options{key} eq ''){
+        $mq->publish(1, $options{host},$document);
+    }
+    else{
+        $mq->publish(1, $options{key},$document);
+    }
     $mq->disconnect();
     return sprintf ( "A new Report Request (%s) has been submitted. Waiting for check results.\n",$uuid);
 }
@@ -161,6 +168,7 @@ Parameters:
 
     --broker        The hostname of a RabbitMQ broker.
     --exchange      The exchange to which report requests should be submitted.  (default: moncli_report_requests)
+    --key           The routing key. Optional. Normally host is used as routing key, but key overrides this when defined.
     --user          The username to authenticate against RabbitMQ. (default: guest)
     --password      The password to authenticate against RabbitMQ. (default: guest)
     --host          The hostname on which Moncli listens. This should also be the name of a Queue (key) in RabbitMQ.
