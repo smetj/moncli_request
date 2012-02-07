@@ -27,6 +27,7 @@ use Getopt::Long;
 use Net::RabbitMQ;
 use Sys::Hostname::FQDN qw(fqdn);
 use POSIX qw(strftime);
+use Time::Local;
 use Data::UUID;
 use JSON;
 use Data::Dumper;
@@ -91,8 +92,9 @@ sub FillBlancs(){
     my $json = decode_json $doc;
     my $ug = new Data::UUID;
     my $uuid = $ug->create();
-    $json->{'source'}->{'name'} = fqdn();
+    $json->{'request'}->{'source'} = fqdn();
     $json->{'request'}->{'uuid'} = $ug->to_string($uuid);
+
     ($json->{'request'}->{'time'},
     $json->{'request'}->{'week_of_year'},
     $json->{'request'}->{'year'},
@@ -100,14 +102,13 @@ sub FillBlancs(){
     $json->{'request'}->{'day_of_week'},
     $json->{'request'}->{'month'},
     $json->{'request'}->{'day'}) = &GetDateInfo();
+
     $json->{'destination'}->{'name'} = $options{host};
     $json->{'destination'}->{'subject'} = $options{subject};
     return (encode_json $json,$json->{'request'}->{'uuid'});
 }
 sub GetDateInfo(){
-    my $now = time();
-    
-    #Get ISO date
+    my $now = timegm(localtime(time));
     my $tz = strftime("%z", localtime($now));
     $tz =~ s/(\d{2})(\d{2})/$1:$2/;
     my $iso_date = strftime("%Y-%m-%dT%H:%M:%S", localtime($now)) . $tz;
