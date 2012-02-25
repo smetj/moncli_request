@@ -9,7 +9,7 @@
        "message":"Idle #idle % - User #user % - System #system % - IOwait #iowait % - Guest #guest % - Steal #steal % - Nice #nice % - IRQ #irq % - Soft #soft %"
    },
    "request":{
-       "cycle":1
+       "cycle":60
    },
    "evaluators":{
       "idle":{
