@@ -1,0 +1,24 @@
+{
+   "plugin":{
+      "name":"processes",
+      "hash":"7384027d47b04ca2af22f00d8f920e81",
+      "timeout":60,
+      "parameters":""
+   },
+   "report":{
+       "message":"Cron: #cron"
+   },
+   "request":{
+       "cycle":60
+   },
+   "evaluators":{
+      "cron":{
+         "evaluator":"re:crond",
+         "metric":"Procs",
+         "thresholds":{
+            "critical":"@1:1"
+         }
+      }
+   },
+   "tags":[]
+}

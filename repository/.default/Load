@@ -14,20 +14,20 @@
    "evaluators":{
       "one":{
          "evaluator":"fm:1_min",
-         "metric":"%",
+         "metric":"load",
          "thresholds":{
          }
       },
       "five":{
          "evaluator":"fm:5_min",
-         "metric":"%",
+         "metric":"load",
          "thresholds":{
             "warning":"5"
          }
       },
       "fifteen":{
          "evaluator":"fm:15_min",
-         "metric":"%",
+         "metric":"load",
          "thresholds":{
             "critical":"10"
          }
