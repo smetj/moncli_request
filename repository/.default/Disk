@@ -1,0 +1,33 @@
+{
+   "plugin":{
+      "name":"disks",
+      "hash":"b567265aceb147762571995e009a25b0",
+      "timeout":60,
+      "parameters":""
+   },
+   "report":{
+       "message":"Root used: Disk #root_space % - Inodes #root_inodes %"
+   },
+   "request":{
+       "cycle":60
+   },
+   "evaluators":{
+      "root_space":{
+         "evaluator":"fm:disk_/",
+         "metric":"%",
+         "thresholds":{
+            "critical":"@98:100",
+            "warning":"@90:98"
+         }
+      },
+      "root_inodes":{
+         "evaluator":"fm:inode_/",
+         "metric":"%",
+         "thresholds":{
+            "critical":"@98:100",
+            "warning":"@90:98"
+         }
+      }
+   },
+   "tags":[]
+}
