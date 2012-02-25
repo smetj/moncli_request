@@ -1,0 +1,37 @@
+{
+   "plugin":{
+      "name":"load",
+      "hash":"6eee2010a568109e06782b5fd8fead28",
+      "timeout":60,
+      "parameters":""
+   },
+   "report":{
+       "message":"1min #one avg - 5min #five avg - 15min #fifteen avg"
+   },
+   "request":{
+       "cycle":60
+   },
+   "evaluators":{
+      "one":{
+         "evaluator":"fm:1_min",
+         "metric":"%",
+         "thresholds":{
+         }
+      },
+      "five":{
+         "evaluator":"fm:5_min",
+         "metric":"%",
+         "thresholds":{
+            "warning":"5"
+         }
+      },
+      "fifteen":{
+         "evaluator":"fm:15_min",
+         "metric":"%",
+         "thresholds":{
+            "critical":"10"
+         }
+      }
+   },
+   "tags":[]
+}
