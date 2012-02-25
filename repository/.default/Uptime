@@ -1,0 +1,24 @@
+{
+   "plugin":{
+      "name":"uptime",
+      "hash":"216f25704df3c2d409d5f200c7302fb3",
+      "timeout":60,
+      "parameters":""
+   },
+   "report":{
+       "message":"Uptime is #uptime hours."
+   },
+   "request":{
+       "cycle":60
+   },
+   "evaluators":{
+      "uptime":{
+         "evaluator":"fm:seconds/3600",
+         "metric":"h",
+         "thresholds":{
+            "warning":"1:"
+         }
+      }
+   },
+   "tags":[]
+}
