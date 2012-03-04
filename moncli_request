@@ -38,7 +38,7 @@ my %options =   ("subject" => '',
                 "host" => '',
                 "key" => '',
                 "broker" => 'localhost',
-                "exchange" => 'moncli_report_requests',
+                "exchange" => 'moncli_requests',
                 "user" => 'guest',
                 "password" => 'guest',
                 "repository" => '/opt/moncli_request/repository');

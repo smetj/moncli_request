@@ -9,7 +9,7 @@
        "message":"Uptime is #uptime hours."
    },
    "request":{
-       "cycle":60
+       "cycle":5
    },
    "evaluators":{
       "uptime":{
