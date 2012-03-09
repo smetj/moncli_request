@@ -41,6 +41,8 @@ my %options =   ("subject" => '',
                 "exchange" => 'moncli_requests',
                 "user" => 'guest',
                 "password" => 'guest',
+                "parameters" => '[]',
+                "tags" => '[]',
                 "repository" => '/opt/moncli_request/repository');
 
 GetOptions ("subject=s" => \$options{subject},
@@ -50,6 +52,8 @@ GetOptions ("subject=s" => \$options{subject},
             "exchange=s" => \$options{exchange},
             "user=s" => \$options{user},
             "password=s" => \$options{password},
+            "parameters=s" => \$options{parameters},
+            "tags=s" => \$options{tags},
             "repository=s" => \$options{repository},
             "help" => \$options{help},
             "h" => \$options{help});
@@ -78,6 +82,7 @@ sub SubmitBroker(){
     my $mq = Net::RabbitMQ->new();
     $mq->connect($options{broker}, { user => $options{user}, password => $options{password} });
     $mq->channel_open(1);
+
     if ($options{key} eq ''){
         $mq->publish(1, $options{host},$document);
     }
@@ -102,7 +107,8 @@ sub FillBlancs(){
     $json->{'request'}->{'day_of_week'},
     $json->{'request'}->{'month'},
     $json->{'request'}->{'day'}) = &GetDateInfo();
-
+    $json->{'plugin'}->{'parameters'} = decode_json $options{parameters},
+    $json->{'tags'} = decode_json $options{tags},
     $json->{'destination'}->{'name'} = $options{host};
     $json->{'destination'}->{'subject'} = $options{subject};
     return (encode_json $json,$json->{'request'}->{'uuid'});
@@ -175,6 +181,7 @@ Parameters:
     --host          The hostname on which Moncli listens. This should also be the name of a Queue (key) in RabbitMQ.
     --subject       The subject of the report request.
     --repository    The absolute pathname of the report request repository. (default: /opt/moncli_request/repository)
+    --parameters    The parameters the script requires.
     
     
 Note:
