@@ -37,7 +37,6 @@ my $version ='0.1';
 my %options =   ("subject" => '',
                 "host" => '',
                 "key" => '',
-                "broker" => 'localhost',
                 "exchange" => 'moncli_requests',
                 "user" => 'guest',
                 "password" => 'guest',
@@ -73,8 +72,15 @@ my $doc = &GetDoc(  $options{repository},
             $options{host},
             $options{subject},
             );
+
 my ($document,$uuid) = &FillBlancs($doc);
-print &SubmitBroker($document,$uuid);
+
+if ( defined $options{broker} ){
+    print &SubmitBroker($document,$uuid);
+}
+else{
+    print $document,"\n";
+}
 
 sub SubmitBroker(){
     my $document=shift;
@@ -173,7 +179,7 @@ Usage:
     
 Parameters:
 
-    --broker        The hostname of a RabbitMQ broker.
+    --broker        The hostname of a RabbitMQ broker. When omitted it will print the JSON document to stdout and exit.
     --exchange      The exchange to which report requests should be submitted.  (default: moncli_report_requests)
     --key           The routing key. Optional. Normally host is used as routing key, but key overrides this when defined.
     --user          The username to authenticate against RabbitMQ. (default: guest)
