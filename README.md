@@ -12,7 +12,7 @@ When executing moncli_request you have to define following parameters:
 
 * broker:
 
-    This is the name of the RabbitMQ message broker.
+    This is the name of the RabbitMQ message broker. When omitted, the JSON document will be printed to STDOUT.
 
 * host
 
