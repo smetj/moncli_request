@@ -1,0 +1,17 @@
+{
+   "plugin":{
+      "name":"",
+      "hash":"",
+      "timeout":60,
+      "parameters":""
+   },
+   "report":{
+       "message":""
+   },
+   "request":{
+       "cycle":60
+   },
+   "evaluators":{
+   },
+   "tags":[]
+}
